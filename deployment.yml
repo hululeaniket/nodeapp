@@ -1,0 +1,30 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: react-app
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: reactapp
+  template:
+    metadata:
+      labels:
+        app: reactapp
+    spec:
+      containers:
+      - name: testwebapp
+        image: aniket1805/firstpipelinejob:v8
+        
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: webapp-service
+spec:
+  ports:
+  - name: tcp
+    port: 80
+    targetPort: 80
+  selector:
+    app: reactapp
